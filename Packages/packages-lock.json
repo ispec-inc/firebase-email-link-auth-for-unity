@@ -225,8 +225,8 @@
       },
       "url": "https://packages.unity.com"
     },
-    "world.ispec.unity.firebase-email-link-auth": {
-      "version": "file:world.ispec.unity.firebase-email-link-auth",
+    "world.ispec.firebase-email-link-auth": {
+      "version": "file:world.ispec.firebase-email-link-auth",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

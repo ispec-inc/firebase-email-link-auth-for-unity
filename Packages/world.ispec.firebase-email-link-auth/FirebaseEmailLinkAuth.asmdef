@@ -1,6 +1,6 @@
 {
     "name": "FirebaseEmailLinkAuth",
-    "rootNamespace": "ispec.Unity.FirebaseEmailLinkAuth",
+    "rootNamespace": "ispec.FirebaseEmailLinkAuth",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

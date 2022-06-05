@@ -1,5 +1,5 @@
 {
-  "name": "world.ispec.unity.firebase-email-link-auth",
+  "name": "world.ispec.firebase-email-link-auth",
   "displayName": "Firebase Email Link Auth",
   "description": "This is a minimal configuration package that enables Firebase mail link authentication to be used with Unity.",
   "version": "1.0.0",
