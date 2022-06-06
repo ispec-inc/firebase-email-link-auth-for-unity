@@ -1,6 +1,6 @@
 namespace Scripts.Gateways
 {
-    public class DataStoreGateway
+    internal class DataStoreGateway
     {
         
     }

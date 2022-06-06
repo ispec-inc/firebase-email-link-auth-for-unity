@@ -1,6 +1,6 @@
-namespace Scripts.Gateways
+namespace ispec.FirebaseEmailLinkAuth
 {
-    public class PlayerPrefsGateway
+    internal class PlayerPrefsGateway
     {
         
     }

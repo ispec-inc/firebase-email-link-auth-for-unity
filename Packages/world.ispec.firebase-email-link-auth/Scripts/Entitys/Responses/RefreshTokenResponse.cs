@@ -1,6 +1,6 @@
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface ITokenResponse
+    internal interface IRefreshTokenResponse
     {
         public string AccessToken { get; set; }
         public string ExpiresIn { get; set; }
@@ -11,7 +11,7 @@ namespace ispec.FirebaseEmailLinkAuth
         public string ProjectId { get; set; }
     }
 
-    internal class TokenResponse : ITokenResponse
+    internal class RefreshTokenResponse : IRefreshTokenResponse
     {
         public string AccessToken { get; set; }
         public string ExpiresIn { get; set; }
@@ -21,7 +21,7 @@ namespace ispec.FirebaseEmailLinkAuth
         public string UserId { get; set; }
         public string ProjectId { get; set; }
 
-        public TokenResponse(
+        public RefreshTokenResponse(
             string accessToken,
             string expiresIn,
             string tokenType,

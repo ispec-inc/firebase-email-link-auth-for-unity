@@ -1,17 +1,17 @@
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface ITokenRequest
+    internal interface IRefreshTokenRequest
     {
         public string GrantType { get; set; }
         public string RefreshToken { get; set; }
     }
 
-    internal class TokenRequest : ITokenRequest
+    internal class RefreshTokenRequest : IRefreshTokenRequest
     {
         public string GrantType { get; set; }
         public string RefreshToken { get; set; }
 
-        public TokenRequest(
+        public RefreshTokenRequest(
             string grantType,
             string refreshToken
         )
