@@ -1,17 +1,17 @@
+using Newtonsoft.Json;
+
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface IEmailLinkSigninRequest
+    internal class EmailLinkSigninRequest
     {
-        public string Email { get; set; }
-        public string OobCode { get; set; }
-        public bool ReturnSecureToken { get; set; }
-    }
+        [JsonProperty("email")]
+        public string Email { get; private set; }
 
-    internal class EmailLinkSigninRequest : IEmailLinkSigninRequest
-    {
-        public string Email { get; set; }
-        public string OobCode { get; set; }
-        public bool ReturnSecureToken { get; set; }
+        [JsonProperty("oobCode")]
+        public string OobCode { get; private set; }
+
+        [JsonProperty("returnSecureToken")]
+        public bool ReturnSecureToken { get; private set; }
 
         public EmailLinkSigninRequest(
             string email,

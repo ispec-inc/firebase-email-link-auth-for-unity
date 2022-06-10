@@ -1,19 +1,20 @@
+using Newtonsoft.Json;
+
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface IGetOobConfirmationCodeRequest
+    internal class GetOobConfirmationCodeRequest
     {
-        public string RequestType { get; set; }
-        public string Email { get; set; }
-        public string ContinueUrl { get; set; }
-        public bool CanHandleCodeInApp { get; set; }
-    }
+        [JsonProperty("requestType")]
+        public string RequestType { get; private set; }
 
-    internal class GetOobConfirmationCodeRequest : IGetOobConfirmationCodeRequest
-    {
-        public string RequestType { get; set; }
-        public string Email { get; set; }
-        public string ContinueUrl { get; set; }
-        public bool CanHandleCodeInApp { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; private set; }
+
+        [JsonProperty("continueUrl")]
+        public string ContinueUrl { get; private set; }
+
+        [JsonProperty("canHandleCodeInApp")]
+        public bool CanHandleCodeInApp { get; private set; }
 
         public GetOobConfirmationCodeRequest(
             string requestType,

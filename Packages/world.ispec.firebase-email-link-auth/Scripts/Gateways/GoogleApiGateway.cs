@@ -4,9 +4,9 @@ namespace ispec.FirebaseEmailLinkAuth
 {
     internal interface IGoogleApiGateway
     {
-        public Task<IGetOobConfirmationCodeResponse> GetOobConfirmationCode(IGetOobConfirmationCodeRequest body);
-        public Task<IEmailLinkSigninResponse> EmailLinkSignin(IEmailLinkSigninRequest body);
-        public Task<IRefreshTokenResponse> RefreshToken(IRefreshTokenRequest body);
+        public Task<GetOobConfirmationCodeResponse> GetOobConfirmationCode(GetOobConfirmationCodeRequest body);
+        public Task<EmailLinkSigninResponse> EmailLinkSignin(EmailLinkSigninRequest body);
+        public Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest body);
     }
 
     internal class GoogleApiGateway : IGoogleApiGateway
@@ -18,38 +18,38 @@ namespace ispec.FirebaseEmailLinkAuth
             _restApiGateway = restApiGateway;
         }
 
-        public Task<IGetOobConfirmationCodeResponse> GetOobConfirmationCode(IGetOobConfirmationCodeRequest body)
+        public Task<GetOobConfirmationCodeResponse> GetOobConfirmationCode(GetOobConfirmationCodeRequest body)
         {
-            return _restApiGateway.Post<IGetOobConfirmationCodeResponse>(
-                GetIdentityToolKitUrl("getOobConfirmationCode"),
-                body.ToDictionary().DictionaryKeyToTopLower()
+            return _restApiGateway.Post<GetOobConfirmationCodeResponse>(
+                CreateIdentityToolKitUrl("getOobConfirmationCode"),
+                body
             );
         }
 
-        public Task<IEmailLinkSigninResponse> EmailLinkSignin(IEmailLinkSigninRequest body)
+        public Task<EmailLinkSigninResponse> EmailLinkSignin(EmailLinkSigninRequest body)
         {
-            return _restApiGateway.Post<IEmailLinkSigninResponse>(
-                GetIdentityToolKitUrl("emailLinkSignin"),
-                body.ToDictionary().DictionaryKeyToTopLower()
+            return _restApiGateway.Post<EmailLinkSigninResponse>(
+                CreateIdentityToolKitUrl("emailLinkSignin"),
+                body
             );
         }
 
-        public Task<IRefreshTokenResponse> RefreshToken(IRefreshTokenRequest body)
+        public Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest body)
         {
-            return _restApiGateway.Post<IRefreshTokenResponse>(
-                GetSecureTokenUrl("token"),
-                body.ToDictionary().DictionaryKeyToSnakeCase()
+            return _restApiGateway.Post<RefreshTokenResponse>(
+                CreateSecureTokenUrl("token"),
+                body
             );
         }
 
-        private static string GetIdentityToolKitUrl(string path)
+        private static string CreateIdentityToolKitUrl(string path)
         {
-            return $"{Constants.GoogleApiUrls.IdentityToolKit}/{path}";
+            return $"{Constants.GoogleApiUrls.IdentityToolKit}/{path}?key={Config.GetFirebaseWebApiKey()}";
         }
 
-        private static string GetSecureTokenUrl(string path)
+        private static string CreateSecureTokenUrl(string path)
         {
-            return $"{Constants.GoogleApiUrls.SecureToken}/{path}";
+            return $"{Constants.GoogleApiUrls.SecureToken}/{path}?key={Config.GetFirebaseWebApiKey()}";
         }
     }
 }

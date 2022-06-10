@@ -1,15 +1,14 @@
+using Newtonsoft.Json;
+
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface IRefreshTokenRequest
+    internal class RefreshTokenRequest
     {
-        public string GrantType { get; set; }
-        public string RefreshToken { get; set; }
-    }
+        [JsonProperty("grant_type")]
+        public string GrantType { get; private set; }
 
-    internal class RefreshTokenRequest : IRefreshTokenRequest
-    {
-        public string GrantType { get; set; }
-        public string RefreshToken { get; set; }
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; private set; }
 
         public RefreshTokenRequest(
             string grantType,

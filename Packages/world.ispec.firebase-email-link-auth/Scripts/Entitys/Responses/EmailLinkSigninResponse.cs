@@ -1,25 +1,29 @@
+using Newtonsoft.Json;
+
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface IEmailLinkSigninResponse
+    internal class EmailLinkSigninResponse
     {
-        public string Kind { get; set; }
-        public string IdToken { get; set; }
-        public string Email { get; set; }
-        public string RefreshToken { get; set; }
-        public string ExpiresIn { get; set; }
-        public string LocalId { get; set; }
-        public bool IsNewUser { get; set; }
-    }
+        [JsonProperty("kind")]
+        public string Kind { get; private set; }
 
-    internal class EmailLinkSigninResponse : IEmailLinkSigninResponse
-    {
-        public string Kind { get; set; }
-        public string IdToken { get; set; }
-        public string Email { get; set; }
-        public string RefreshToken { get; set; }
-        public string ExpiresIn { get; set; }
-        public string LocalId { get; set; }
-        public bool IsNewUser { get; set; }
+        [JsonProperty("idToken")]
+        public string IdToken { get; private set; }
+
+        [JsonProperty("email")]
+        public string Email { get; private set; }
+
+        [JsonProperty("refreshToken")]
+        public string RefreshToken { get; private set; }
+
+        [JsonProperty("expiresIn")]
+        public string ExpiresIn { get; private set; }
+
+        [JsonProperty("localId")]
+        public string LocalId { get; private set; }
+
+        [JsonProperty("isNewUser")]
+        public bool IsNewUser { get; private set; }
 
         public EmailLinkSigninResponse(
             string kind,

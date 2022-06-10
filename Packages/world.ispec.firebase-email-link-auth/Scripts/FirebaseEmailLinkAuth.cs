@@ -1,6 +1,10 @@
 namespace ispec.FirebaseEmailLinkAuth
 {
-    public class FirebaseEmailLinkAuth
+    public interface IFirebaseEmailLinkAuth
+    {
+    }
+
+    public class FirebaseEmailLinkAuth : IFirebaseEmailLinkAuth
     {
     }
 }

@@ -1,25 +1,29 @@
+using Newtonsoft.Json;
+
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal interface IRefreshTokenResponse
+    internal class RefreshTokenResponse
     {
-        public string AccessToken { get; set; }
-        public string ExpiresIn { get; set; }
-        public string TokenType { get; set; }
-        public string RefreshToken { get; set; }
-        public string IdToken { get; set; }
-        public string UserId { get; set; }
-        public string ProjectId { get; set; }
-    }
+        [JsonProperty("access_token")]
+        public string AccessToken { get; private set; }
 
-    internal class RefreshTokenResponse : IRefreshTokenResponse
-    {
-        public string AccessToken { get; set; }
-        public string ExpiresIn { get; set; }
-        public string TokenType { get; set; }
-        public string RefreshToken { get; set; }
-        public string IdToken { get; set; }
-        public string UserId { get; set; }
-        public string ProjectId { get; set; }
+        [JsonProperty("expires_in")]
+        public string ExpiresIn { get; private set; }
+
+        [JsonProperty("token_type")]
+        public string TokenType { get; private set; }
+
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; private set; }
+
+        [JsonProperty("id_token")]
+        public string IdToken { get; private set; }
+
+        [JsonProperty("user_id")]
+        public string UserId { get; private set; }
+
+        [JsonProperty("project_id")]
+        public string ProjectId { get; private set; }
 
         public RefreshTokenResponse(
             string accessToken,

@@ -1,17 +1,17 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace ispec.FirebaseEmailLinkAuth
 {
     internal static class JsonConverter
     {
-        public static T FromJson<T>(string jsonData)
+        public static T FromJson<T>(this string jsonData)
         {
-            return JsonUtility.FromJson<T>(jsonData);
+            return JsonConvert.DeserializeObject<T>(jsonData);
         }
 
-        public static string ToJson(object objectData)
+        public static string ToJson(this object objectData)
         {
-            return JsonUtility.ToJson(objectData);
+            return JsonConvert.SerializeObject(objectData);
         }
     }
 }

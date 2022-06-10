@@ -25,5 +25,11 @@ namespace ispec.FirebaseEmailLinkAuth
             public static readonly string ConfigFileDoseNotExist =
                 $"{FileNames.ConfigFileName} file does not exist.";
         }
+
+        public static class DataStoreKeys
+        {
+            public static readonly string AuthDataStoreKey =
+                "firebase-email-link-auth-data";
+        }
     }
 }
