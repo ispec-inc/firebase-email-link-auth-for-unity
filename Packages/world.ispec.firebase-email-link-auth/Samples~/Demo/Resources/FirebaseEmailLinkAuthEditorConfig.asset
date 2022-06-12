@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b054d7ccf9c42d8ae2ab6f8a68ff9d3, type: 3}
-  m_Name: FirebaseEmailLinkAuthConfig
+  m_Script: {fileID: 11500000, guid: ed034e8bfe854e8a859094045563f4f4, type: 3}
+  m_Name: FirebaseEmailLinkAuthEditorConfig
   m_EditorClassIdentifier: 
-  firebaseWebApiKey: 
-  continueUrl: 
-  iosAppStoreId: 
-  iosBundleId: 
+  domain: 

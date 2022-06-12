@@ -17,7 +17,7 @@ namespace ispec.FirebaseEmailLinkAuth
         public string RefreshToken { get; private set; }
 
         [JsonProperty("expiresIn")]
-        public string ExpiresIn { get; private set; }
+        public int ExpiresIn { get; private set; }
 
         [JsonProperty("localId")]
         public string LocalId { get; private set; }
@@ -30,7 +30,7 @@ namespace ispec.FirebaseEmailLinkAuth
             string idToken,
             string email,
             string refreshToken,
-            string expiresIn,
+            int expiresIn,
             string localId,
             bool isNewUser
         )

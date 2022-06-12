@@ -12,12 +12,13 @@ namespace ispec.FirebaseEmailLinkAuth
 
         public static string GetString(string key)
         {
-            return HasKey(key) ? PlayerPrefs.GetString(key) : null;
+            return PlayerPrefs.GetString(key);
         }
 
         public static void DeleteKey(string key)
         {
             PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
         }
 
         public static bool HasKey(string key)

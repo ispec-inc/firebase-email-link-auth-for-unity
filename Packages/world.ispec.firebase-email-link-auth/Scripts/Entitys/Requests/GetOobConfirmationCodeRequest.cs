@@ -16,17 +16,27 @@ namespace ispec.FirebaseEmailLinkAuth
         [JsonProperty("canHandleCodeInApp")]
         public bool CanHandleCodeInApp { get; private set; }
 
+        [JsonProperty("iOSAppStoreId")]
+        public string IosAppStoreId { get; private set; }
+
+        [JsonProperty("iOSBundleId")]
+        public string IosBundleId { get; private set; }
+
         public GetOobConfirmationCodeRequest(
             string requestType,
             string email,
             string continueUrl,
-            bool canHandleCodeInApp
+            bool canHandleCodeInApp,
+            string iosAppStoreId,
+            string iosBundleId
         )
         {
             RequestType = requestType;
             Email = email;
             ContinueUrl = continueUrl;
             CanHandleCodeInApp = canHandleCodeInApp;
+            IosAppStoreId = iosAppStoreId;
+            IosBundleId = iosBundleId;
         }
     }
 }

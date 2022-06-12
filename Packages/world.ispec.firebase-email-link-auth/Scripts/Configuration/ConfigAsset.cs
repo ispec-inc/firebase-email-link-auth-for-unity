@@ -12,6 +12,18 @@ namespace ispec.FirebaseEmailLinkAuth
         [SerializeField]
         private string firebaseWebApiKey = "";
 
+        [SerializeField]
+        private string continueUrl = "";
+
+        [SerializeField]
+        private string iosAppStoreId = "";
+
+        [SerializeField]
+        private string iosBundleId = "";
+
         public string FirebaseWebApiKey => firebaseWebApiKey;
+        public string ContinueUrl => continueUrl;
+        public string IosAppStoreId => iosAppStoreId;
+        public string IosBundleId => iosBundleId;
     }
 }

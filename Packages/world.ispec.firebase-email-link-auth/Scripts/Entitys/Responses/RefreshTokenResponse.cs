@@ -8,7 +8,7 @@ namespace ispec.FirebaseEmailLinkAuth
         public string AccessToken { get; private set; }
 
         [JsonProperty("expires_in")]
-        public string ExpiresIn { get; private set; }
+        public int ExpiresIn { get; private set; }
 
         [JsonProperty("token_type")]
         public string TokenType { get; private set; }
@@ -27,7 +27,7 @@ namespace ispec.FirebaseEmailLinkAuth
 
         public RefreshTokenResponse(
             string accessToken,
-            string expiresIn,
+            int expiresIn,
             string tokenType,
             string refreshToken,
             string idToken,
