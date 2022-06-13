@@ -4,7 +4,7 @@ namespace ispec.FirebaseEmailLinkAuth
 {
     public interface IFirebaseEmailLinkAuth
     {
-        public Task<bool> SendAuthLinkEmail(string email, string continueUrl);
+        public Task<bool> SendAuthLinkEmail(string email);
         public Task<bool> SignIn(string oobCode);
         public Task<string> GetToken();
         public void SignOut();
@@ -13,17 +13,23 @@ namespace ispec.FirebaseEmailLinkAuth
     public class FirebaseEmailLinkAuth : IFirebaseEmailLinkAuth
     {
         private readonly IGoogleApiGateway _googleApiGateway;
+        private static readonly FirebaseEmailLinkAuth Instance = new FirebaseEmailLinkAuth();
 
-        public FirebaseEmailLinkAuth()
+        public static FirebaseEmailLinkAuth GetInstance()
+        {
+            return Instance;
+        }
+
+        private FirebaseEmailLinkAuth()
         {
             _googleApiGateway = new GoogleApiGateway(
                 new RestApiGateway()
             );
         }
 
-        public async Task<bool> SendAuthLinkEmail(string email, string continueUrl)
+        public async Task<bool> SendAuthLinkEmail(string email)
         {
-            if (MailAddressChecker.IsEmailAddress(email))
+            if (!MailAddressChecker.IsEmailAddress(email))
             {
                 return false;
             }
@@ -34,7 +40,7 @@ namespace ispec.FirebaseEmailLinkAuth
                     new GetOobConfirmationCodeRequest(
                         "EMAIL_SIGNIN",
                         email,
-                        continueUrl,
+                        Config.GetContinueUrl(),
                         true,
                         Config.GetIosAppStoreId(),
                         Config.GetIosBundleId()
