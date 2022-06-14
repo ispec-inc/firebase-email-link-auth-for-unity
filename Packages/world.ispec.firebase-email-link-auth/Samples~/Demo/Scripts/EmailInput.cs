@@ -63,6 +63,11 @@ namespace Demo
             SceneManager.LoadScene("03-SignInComplete");
         }
 
+        public static void TransitionToSignUpCompleteScreen()
+        {
+            SceneManager.LoadScene("04-SignUpComplete");
+        }
+
         public static void TransitionToErrorScreen()
         {
             SceneManager.LoadScene("99-Error");

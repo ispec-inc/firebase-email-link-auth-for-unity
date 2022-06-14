@@ -8,6 +8,7 @@ namespace ispec.FirebaseEmailLinkAuth
     {
         private static DeepLinkManager Instance { get; set; }
 
+        public UnityEvent signUpSuccessful;
         public UnityEvent signInSuccessful;
         public UnityEvent signInFailure;
 
@@ -51,13 +52,18 @@ namespace ispec.FirebaseEmailLinkAuth
             var response = await FirebaseEmailLinkAuth
                 .GetInstance()
                 .SignIn(oobCodes.First());
-            if (response.result)
+            if (!response.result)
             {
-                signInSuccessful.Invoke();
+                signInFailure.Invoke();
+                return;
+            }
+            if (response.isNewUser)
+            {
+                signUpSuccessful.Invoke();
             }
             else
             {
-                signInFailure.Invoke();
+                signInSuccessful.Invoke();
             }
         }
     }

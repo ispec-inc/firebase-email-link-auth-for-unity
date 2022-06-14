@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Samples/Demo/Scenes/03-SignInComplete.unity
     guid: 8b33c05c051ac4d288a3b561c7291872
   - enabled: 1
+    path: Assets/Samples/Demo/Scenes/04-SignUpComplete.unity
+    guid: 7e7dc66942aa64421b8dd6f925241fec
+  - enabled: 1
     path: Assets/Samples/Demo/Scenes/99-Error.unity
     guid: 71775a59288a148de9df0718c2618a59
   m_configObjects: {}
