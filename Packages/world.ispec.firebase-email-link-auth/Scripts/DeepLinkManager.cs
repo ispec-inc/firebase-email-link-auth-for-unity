@@ -51,7 +51,7 @@ namespace ispec.FirebaseEmailLinkAuth
             var response = await FirebaseEmailLinkAuth
                 .GetInstance()
                 .SignIn(oobCodes.First());
-            if (response)
+            if (response.result)
             {
                 signInSuccessful.Invoke();
             }

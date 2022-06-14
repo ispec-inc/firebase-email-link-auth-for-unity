@@ -5,7 +5,7 @@ namespace ispec.FirebaseEmailLinkAuth
     public interface IFirebaseEmailLinkAuth
     {
         public Task<bool> SendAuthLinkEmail(string email);
-        public Task<bool> SignIn(string oobCode);
+        public Task<(bool result, bool isNewUser)> SignIn(string oobCode);
         public Task<string> GetToken();
         public void SignOut();
     }
@@ -63,7 +63,7 @@ namespace ispec.FirebaseEmailLinkAuth
             return true;
         }
 
-        public async Task<bool> SignIn(string oobCode)
+        public async Task<(bool result, bool isNewUser)> SignIn(string oobCode)
         {
             var currentUnixTime = UnixTimeGetter.GetCurrentUnixTime();
             try
@@ -84,12 +84,12 @@ namespace ispec.FirebaseEmailLinkAuth
                         currentUnixTime + response.ExpiresIn
                     )
                 );
+                return (true, response.IsNewUser);
             }
             catch
             {
-                return false;
+                return (false, false);
             }
-            return true;
         }
 
         public async Task<string> GetToken()
