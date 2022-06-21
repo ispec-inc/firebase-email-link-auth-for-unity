@@ -8,6 +8,8 @@ namespace ispec.FirebaseEmailLinkAuth
         public Task<bool> SendAuthLinkEmail(string email);
         public Task<(bool result, bool isNewUser)> SignIn(string oobCode);
         public Task<string> GetToken();
+        [CanBeNull]
+        public string GetUserEmail();
         public void SignOut();
     }
 
