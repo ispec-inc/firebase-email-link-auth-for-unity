@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace ispec.FirebaseEmailLinkAuth
 {
@@ -121,6 +123,20 @@ namespace ispec.FirebaseEmailLinkAuth
                 );
 
                 return response.IdToken;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        [CanBeNull]
+        public string GetUserEmail()
+        {
+            try
+            {
+                var authData = AuthDataStore.GetAuthData();
+                return authData.Email;
             }
             catch
             {
