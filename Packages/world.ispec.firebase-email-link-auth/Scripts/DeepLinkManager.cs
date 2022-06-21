@@ -17,6 +17,7 @@ namespace ispec.FirebaseEmailLinkAuth
             if (Instance != null)
             {
                 Destroy(gameObject);
+                return;
             }
 
             Instance = this;
