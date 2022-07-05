@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace ispec.FirebaseEmailLinkAuth
@@ -16,19 +17,31 @@ namespace ispec.FirebaseEmailLinkAuth
         [JsonProperty("canHandleCodeInApp")]
         public bool CanHandleCodeInApp { get; private set; }
 
-        [JsonProperty("iOSAppStoreId")]
+        [JsonProperty("iOSAppStoreId")] [CanBeNull]
         public string IosAppStoreId { get; private set; }
 
-        [JsonProperty("iOSBundleId")]
+        [JsonProperty("iOSBundleId")] [CanBeNull]
         public string IosBundleId { get; private set; }
+
+        [JsonProperty("androidPackageName")] [CanBeNull]
+        public string AndroidPackageName { get; private set; }
+
+        [JsonProperty("androidMinimumVersion")] [CanBeNull]
+        public string AndroidMinimumVersion { get; private set; }
+
+        [JsonProperty("androidInstallApp")]
+        public bool AndroidInstallApp { get; private set; }
 
         public GetOobConfirmationCodeRequest(
             string requestType,
             string email,
             string continueUrl,
             bool canHandleCodeInApp,
-            string iosAppStoreId,
-            string iosBundleId
+            [CanBeNull] string iosAppStoreId = null,
+            [CanBeNull] string iosBundleId = null,
+            [CanBeNull] string androidPackageName = null,
+            [CanBeNull] string androidMinimumVersion = null,
+            bool androidInstallApp = false
         )
         {
             RequestType = requestType;
@@ -37,6 +50,9 @@ namespace ispec.FirebaseEmailLinkAuth
             CanHandleCodeInApp = canHandleCodeInApp;
             IosAppStoreId = iosAppStoreId;
             IosBundleId = iosBundleId;
+            AndroidPackageName = androidPackageName;
+            AndroidMinimumVersion = androidMinimumVersion;
+            AndroidInstallApp = androidInstallApp;
         }
     }
 }

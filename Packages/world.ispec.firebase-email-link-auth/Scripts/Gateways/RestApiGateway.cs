@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine.Networking;
 
 namespace ispec.FirebaseEmailLinkAuth
@@ -21,7 +22,12 @@ namespace ispec.FirebaseEmailLinkAuth
         public Task<T> Post<T>(string url, object param)
         {
             var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-            var bodyRaw = Encoding.UTF8.GetBytes(param.ToJson());
+            var bodyRaw = Encoding.UTF8.GetBytes(param.ToJson(
+                new JsonSerializerSettings()
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                }
+            ));
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");

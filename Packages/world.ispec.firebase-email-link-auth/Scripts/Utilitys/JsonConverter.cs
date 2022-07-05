@@ -13,5 +13,16 @@ namespace ispec.FirebaseEmailLinkAuth
         {
             return JsonConvert.SerializeObject(objectData);
         }
+
+        public static string ToJson(
+            this object objectData,
+            JsonSerializerSettings settings
+        )
+        {
+            return JsonConvert.SerializeObject(
+                objectData,
+                settings
+            );
+        }
     }
 }

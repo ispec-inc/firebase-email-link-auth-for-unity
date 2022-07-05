@@ -21,9 +21,21 @@ namespace ispec.FirebaseEmailLinkAuth
         [SerializeField]
         private string iosBundleId = "";
 
+        [SerializeField]
+        private string androidPackageName = "";
+
+        [SerializeField]
+        private string androidMinimumVersion = "";
+
+        [SerializeField]
+        private bool androidInstallApp;
+
         public string FirebaseWebApiKey => firebaseWebApiKey;
         public string ContinueUrl => continueUrl;
         public string IosAppStoreId => iosAppStoreId;
         public string IosBundleId => iosBundleId;
+        public string AndroidPackageName => androidPackageName;
+        public string AndroidMinimumVersion => androidMinimumVersion;
+        public bool AndroidInstallApp => androidInstallApp;
     }
 }

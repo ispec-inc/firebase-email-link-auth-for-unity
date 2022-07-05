@@ -1,47 +1,58 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ispec.FirebaseEmailLinkAuth.Editor
 {
-    internal static class Config
+    internal class Config
     {
-        public static string GetDomain()
+        private static readonly Config Instance = new Config();
+
+        private ConfigAsset _configAsset;
+
+        public static ConfigAsset GetValue()
         {
-            var domain = "";
-            var configAssets = GetConfigAssets();
-
-            foreach (var configAsset in configAssets)
-            {
-                if (!string.IsNullOrWhiteSpace(domain))
-                {
-                    Resources.UnloadAsset(configAsset);
-                    continue;
-                }
-                if (!string.IsNullOrWhiteSpace(configAsset.Domain))
-                {
-                    domain = configAsset.Domain;
-                }
-                Resources.UnloadAsset(configAsset);
-            }
-
-            return string.IsNullOrWhiteSpace(domain) ? null : domain;
+            return Instance._configAsset;
         }
 
-        private static ConfigAsset[] GetConfigAssets()
+        private Config()
         {
-            var configAssets = Resources.LoadAll<ConfigAsset>(Constants.FileNames.EditorConfigFileName);
+            var configAssets = LoadConfigAssets();
             ShowFileCountError(configAssets);
+            SetConfig(configAssets);
+            configAssets = null;
+            Resources.UnloadUnusedAssets();
+        }
+
+        private void SetConfig(IReadOnlyCollection<ConfigAsset> configAssets)
+        {
+            _configAsset = configAssets.FirstOrDefault();
+        }
+
+        private static ConfigAsset[] LoadConfigAssets()
+        {
+            var configAssets = Resources.LoadAll<ConfigAsset>(
+                Constants.FileNames.EditorConfigFileName
+            );
             return configAssets;
         }
 
-        private static void ShowFileCountError(ConfigAsset[] configAssets)
+        private static void ShowFileCountError(
+            IReadOnlyCollection<ConfigAsset> configAssets
+        )
         {
-            if (configAssets.Length > 1)
+            switch (configAssets.Count)
             {
-                Debug.LogError(Constants.ErrorMessages.ConfigFileExistsMultiple);
-            }
-            else if (configAssets.Length == 0)
-            {
-                Debug.LogError(Constants.ErrorMessages.ConfigFileDoseNotExist);
+                case 0:
+                    Debug.LogError(
+                        Constants.ErrorMessages.ConfigFileDoseNotExist
+                    );
+                    break;
+                case > 1:
+                    Debug.LogError(
+                        Constants.ErrorMessages.ConfigFileExistsMultiple
+                    );
+                    break;
             }
         }
     }

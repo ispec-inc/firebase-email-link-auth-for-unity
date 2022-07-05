@@ -29,12 +29,11 @@ namespace ispec.FirebaseEmailLinkAuth.Editor
                 entitlementsFileName,
                 targetName
             );
-            var domain = Config.GetDomain();
 
             entitlements.AddAssociatedDomains(
                 new []
                 {
-                    "applinks:" + domain
+                    $"applinks:{Config.GetValue().Domain}"
                 }
             );
             entitlements.WriteToFile();

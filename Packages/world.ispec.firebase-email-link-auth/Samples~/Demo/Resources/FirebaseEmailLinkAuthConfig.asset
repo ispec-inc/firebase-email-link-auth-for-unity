@@ -16,3 +16,6 @@ MonoBehaviour:
   continueUrl: 
   iosAppStoreId: 
   iosBundleId: 
+  androidPackageName: 
+  androidMinimumVersion: 
+  androidInstallApp: 0

@@ -1,113 +1,58 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ispec.FirebaseEmailLinkAuth
 {
-    internal static class Config
+    internal class Config
     {
-        public static string GetFirebaseWebApiKey()
+        private static readonly Config Instance = new Config();
+
+        private ConfigAsset _configAsset;
+
+        public static ConfigAsset GetValue()
         {
-            var apiKey = "";
-            var configAssets = GetConfigAssets();
-
-            foreach (var configAsset in configAssets)
-            {
-                if (!string.IsNullOrWhiteSpace(apiKey))
-                {
-                    Resources.UnloadAsset(configAsset);
-                    continue;
-                }
-                if (!string.IsNullOrWhiteSpace(configAsset.FirebaseWebApiKey))
-                {
-                    apiKey = configAsset.FirebaseWebApiKey;
-                }
-                Resources.UnloadAsset(configAsset);
-            }
-
-            return string.IsNullOrWhiteSpace(apiKey) ? null : apiKey;
+            return Instance._configAsset;
         }
 
-        public static string GetContinueUrl()
+        private Config()
         {
-            var continueUrl = "";
-            var configAssets = GetConfigAssets();
-
-            foreach (var configAsset in configAssets)
-            {
-                if (!string.IsNullOrWhiteSpace(continueUrl))
-                {
-                    Resources.UnloadAsset(configAsset);
-                    continue;
-                }
-                if (!string.IsNullOrWhiteSpace(configAsset.ContinueUrl))
-                {
-                    continueUrl = configAsset.ContinueUrl;
-                }
-                Resources.UnloadAsset(configAsset);
-            }
-
-            return string.IsNullOrWhiteSpace(continueUrl) ? null : continueUrl;
-        }
-
-        public static string GetIosAppStoreId()
-        {
-            var iosAppStoreId = "";
-            var configAssets = GetConfigAssets();
-
-            foreach (var configAsset in configAssets)
-            {
-                if (!string.IsNullOrWhiteSpace(iosAppStoreId))
-                {
-                    Resources.UnloadAsset(configAsset);
-                    continue;
-                }
-                if (!string.IsNullOrWhiteSpace(configAsset.IosAppStoreId))
-                {
-                    iosAppStoreId = configAsset.IosAppStoreId;
-                }
-                Resources.UnloadAsset(configAsset);
-            }
-
-            return string.IsNullOrWhiteSpace(iosAppStoreId) ? null : iosAppStoreId;
-        }
-
-        public static string GetIosBundleId()
-        {
-            var iosBundleId = "";
-            var configAssets = GetConfigAssets();
-
-            foreach (var configAsset in configAssets)
-            {
-                if (!string.IsNullOrWhiteSpace(iosBundleId))
-                {
-                    Resources.UnloadAsset(configAsset);
-                    continue;
-                }
-                if (!string.IsNullOrWhiteSpace(configAsset.IosBundleId))
-                {
-                    iosBundleId = configAsset.IosBundleId;
-                }
-                Resources.UnloadAsset(configAsset);
-            }
-
-            return string.IsNullOrWhiteSpace(iosBundleId) ? null : iosBundleId;
-        }
-
-        private static ConfigAsset[] GetConfigAssets()
-        {
-            var configAssets = Resources.LoadAll<ConfigAsset>(Constants.FileNames.ConfigFileName);
+            var configAssets = LoadConfigAssets();
             ShowFileCountError(configAssets);
+            SetConfig(configAssets);
+            configAssets = null;
+            Resources.UnloadUnusedAssets();
+        }
+
+        private void SetConfig(IReadOnlyCollection<ConfigAsset> configAssets)
+        {
+            _configAsset = configAssets.FirstOrDefault();
+        }
+
+        private static ConfigAsset[] LoadConfigAssets()
+        {
+            var configAssets = Resources.LoadAll<ConfigAsset>(
+                Constants.FileNames.ConfigFileName
+            );
             return configAssets;
         }
 
-        private static void ShowFileCountError(ConfigAsset[] configAssets)
+        private static void ShowFileCountError(
+            IReadOnlyCollection<ConfigAsset> configAssets
+        )
         {
-            if (configAssets.Length > 1)
+            switch (configAssets.Count)
             {
-                Debug.LogError(Constants.ErrorMessages.ConfigFileExistsMultiple);
-            }
-            else if (configAssets.Length == 0)
-            {
-                Debug.LogError(Constants.ErrorMessages.ConfigFileDoseNotExist);
+                case 0:
+                    Debug.LogError(
+                        Constants.ErrorMessages.ConfigFileDoseNotExist
+                    );
+                    break;
+                case > 1:
+                    Debug.LogError(
+                        Constants.ErrorMessages.ConfigFileExistsMultiple
+                    );
+                    break;
             }
         }
     }

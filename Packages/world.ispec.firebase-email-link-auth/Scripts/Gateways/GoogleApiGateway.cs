@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ispec.FirebaseEmailLinkAuth
 {
@@ -44,12 +45,12 @@ namespace ispec.FirebaseEmailLinkAuth
 
         private static string CreateIdentityToolKitUrl(string path)
         {
-            return $"{Constants.GoogleApiUrls.IdentityToolKit}/{path}?key={Config.GetFirebaseWebApiKey()}";
+            return $"{Constants.GoogleApiUrls.IdentityToolKit}/{path}?key={Config.GetValue().FirebaseWebApiKey}";
         }
 
         private static string CreateSecureTokenUrl(string path)
         {
-            return $"{Constants.GoogleApiUrls.SecureToken}/{path}?key={Config.GetFirebaseWebApiKey()}";
+            return $"{Constants.GoogleApiUrls.SecureToken}/{path}?key={Config.GetValue().FirebaseWebApiKey}";
         }
     }
 }

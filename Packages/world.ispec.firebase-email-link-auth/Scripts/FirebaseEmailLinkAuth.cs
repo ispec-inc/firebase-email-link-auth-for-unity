@@ -43,10 +43,13 @@ namespace ispec.FirebaseEmailLinkAuth
                     new GetOobConfirmationCodeRequest(
                         "EMAIL_SIGNIN",
                         email,
-                        Config.GetContinueUrl(),
+                        Config.GetValue().ContinueUrl,
                         true,
-                        Config.GetIosAppStoreId(),
-                        Config.GetIosBundleId()
+                        GetNullOrValue(Config.GetValue().IosAppStoreId),
+                        GetNullOrValue(Config.GetValue().IosBundleId),
+                        GetNullOrValue(Config.GetValue().AndroidPackageName),
+                        GetNullOrValue(Config.GetValue().AndroidMinimumVersion),
+                        Config.GetValue().AndroidInstallApp
                     )
                 );
                 AuthDataStore.SetAuthData(
@@ -136,8 +139,7 @@ namespace ispec.FirebaseEmailLinkAuth
         {
             try
             {
-                var authData = AuthDataStore.GetAuthData();
-                return authData.Email;
+                return AuthDataStore.GetAuthData().Email;
             }
             catch
             {
@@ -148,6 +150,12 @@ namespace ispec.FirebaseEmailLinkAuth
         public void SignOut()
         {
             AuthDataStore.DeleteAuthData();
+        }
+
+        [CanBeNull]
+        private string GetNullOrValue(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value;
         }
     }
 }
