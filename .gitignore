@@ -78,3 +78,6 @@ crashlytics-build.properties
 # Editor settings
 .vscode/
 .idea/
+
+# KeyStore files
+*.keystore
